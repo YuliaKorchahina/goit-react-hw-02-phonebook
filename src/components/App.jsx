@@ -8,6 +8,7 @@ export class App extends Component {
   state = {
     contacts: [],
     name: '',
+    number: ''
   };
 
   addContact = newContact => {
