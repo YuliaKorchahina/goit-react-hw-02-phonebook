@@ -1,13 +1,17 @@
 import { Formik, Field } from 'formik';
 import { FormField, Form, ErrorMessage } from './FormStyle.styled';
 import { nanoid } from 'nanoid';
-// import * as Yup from 'yup';
+import PropTypes from 'prop-types';
+
 const initialValues = {
   name: '',
+  number: ''
 };
 
 export const Phonebook = ({ onSave }) => {
   return (
+    <>
+    <h2>Phonebook</h2>
     <Formik
       initialValues={initialValues}
       onSubmit={(values, actions) => {
@@ -29,8 +33,24 @@ export const Phonebook = ({ onSave }) => {
           />
           <ErrorMessage name="name" component="span" />
         </FormField>
-        <button type="submit">Add contact</button>
+        <FormField>
+          Number
+          <Field
+          type="tel"
+          name="number"
+          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+          required
+        />
+        </FormField>
+        <button type="submit">Add contact ✅</button>
       </Form>
     </Formik>
+    </>
   );
 };
+
+Phonebook.propTypes = {
+  onSave: PropTypes.func.isRequired
+}
+
